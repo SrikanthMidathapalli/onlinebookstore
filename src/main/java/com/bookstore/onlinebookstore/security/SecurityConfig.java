@@ -24,14 +24,13 @@ public class SecurityConfig {
         http
             .csrf().disable()
             .authorizeRequests()
-            .requestMatchers("/api/auth/**").permitAll()
-            .requestMatchers("/api/users").hasRole("ADMIN")
-            .anyRequest().authenticated()
+            .requestMatchers("/", "/home", "/signup.html", "/login.html", "/api/auth/**").permitAll()  // Permit public access
+            .requestMatchers("/api/users").hasRole("ADMIN")  // Only ADMIN role can access /api/users
+            .anyRequest().authenticated()  // Authenticate all other requests
             .and()
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);  // Stateless sessions
 
-        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-
+        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);  // Add JWT filter
         return http.build();
     }
 
