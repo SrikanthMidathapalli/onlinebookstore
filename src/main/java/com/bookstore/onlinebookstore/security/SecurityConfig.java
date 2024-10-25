@@ -24,7 +24,7 @@ public class SecurityConfig {
         http
             .csrf().disable()
             .authorizeRequests()
-            .requestMatchers("/", "/home", "/signup.html", "/login.html", "/api/auth/**").permitAll()  // Permit public access
+            .requestMatchers("/", "/home", "/WEB-INF/jsp/signup.jsp", "/WEB-INF/jsp/login.jsp", "/api/auth/**").permitAll()  // Permit public access
             .requestMatchers("/api/users").hasRole("ADMIN")  // Only ADMIN role can access /api/users
             .anyRequest().authenticated()  // Authenticate all other requests
             .and()
