@@ -39,7 +39,7 @@ public class SecurityConfigPermitAll {
             .csrf().disable()
             .authorizeRequests()
                 .requestMatchers("/api/users/**","/api/authors/**","/api/genres/**","/api/books/**",
-                		"api/cart-items/**","/api/orders/**","/api/order-items/**","/api/reviews/**").permitAll()
+                		"api/cart-items/**","/api/orders/**","/api/order-items/**","/api/reviews/**","/api/auth/**").permitAll()
                 .anyRequest().authenticated()
             .and()
             .httpBasic();
