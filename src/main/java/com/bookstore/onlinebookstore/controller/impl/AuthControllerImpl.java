@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/api/auth")
+@RequestMapping("/auth")
 public class AuthControllerImpl {
 
     @Autowired
@@ -17,25 +17,25 @@ public class AuthControllerImpl {
 
     @GetMapping("/signup")
     public String signupForm() {
-        return "signup";  // Returns signup.jsp
+        return "signup";  // This will map to src/main/resources/templates/signup.html
     }
 
     @GetMapping("/login")
     public String loginForm() {
-        return "login";  // Returns login.jsp
+        return "login";  // This will map to src/main/resources/templates/login.html
     }
 
     @PostMapping("/signup")
     public String signup(@ModelAttribute UserDTO userDTO, Model model) {
         UserEntity user = authService.signup(userDTO);
         model.addAttribute("user", user);
-        return "redirect:/api/auth/login";  // Redirect to login page after signup
+        return "redirect:/auth/login";  // Redirect after signup
     }
 
     @PostMapping("/login")
     public String login(@ModelAttribute UserDTO userDTO, Model model) {
         String token = authService.login(userDTO);
         model.addAttribute("token", token);
-        return "redirect:/home";  // Redirect to home or another page after login
+        return "redirect:/home";  // Redirect after login
     }
 }
